@@ -24,80 +24,54 @@ class SatelliteConfig:
 
     # Band specific metadata
     UNIVERSAL_BAND_METADATA = {
-        'CMI_C01': {'central_band_wavelength': '0.47', 'long_name': 'ABI Cloud and Moisture Imagery reflectance factor',
-                    'standard_name': 'toa_lambertian_equivalent_albedo_multiplied_by_cosine_solar_zenith_angle',
-                    'descriptive_name': 'blue', 'valid_range': [0.0, 1.0], 'units': '1', "grid_mapping": "crs"},
-
-        'CMI_C02': {'central_band_wavelength': '0.64', 'long_name': 'ABI Cloud and Moisture Imagery reflectance factor',
-                    'standard_name': 'toa_lambertian_equivalent_albedo_multiplied_by_cosine_solar_zenith_angle',
-                    'descriptive_name': 'red', 'valid_range': [0.0, 1.0], 'units': '1', "grid_mapping": "crs"},
-
-        'CMI_C03': {'central_band_wavelength': '0.86', 'long_name': 'ABI Cloud and Moisture Imagery reflectance factor',
-                    'standard_name': 'toa_lambertian_equivalent_albedo_multiplied_by_cosine_solar_zenith_angle',
-                    'descriptive_name': 'vegetation', 'valid_range': [0.0, 1.0], 'units': '1', "grid_mapping": "crs"},
-
-        'CMI_C04': {'central_band_wavelength': '1.37', 'long_name': 'ABI Cloud and Moisture Imagery reflectance factor',
-                    'standard_name': 'toa_lambertian_equivalent_albedo_multiplied_by_cosine_solar_zenith_angle',
-                    'descriptive_name': 'cirrus', 'valid_range': [0.0, 1.0], 'units': '1', "grid_mapping": "crs"},
-
-        'CMI_C05': {'central_band_wavelength': '1.61', 'long_name': 'ABI Cloud and Moisture Imagery reflectance factor',
-                    'standard_name': 'toa_lambertian_equivalent_albedo_multiplied_by_cosine_solar_zenith_angle',
-                    'descriptive_name': 'snow/ice', 'valid_range': [0.0, 1.0], 'units': '1', "grid_mapping": "crs"},
-
-        'CMI_C06': {'central_band_wavelength': '2.24', 'long_name': 'ABI Cloud and Moisture Imagery reflectance factor',
-                    'standard_name': 'toa_lambertian_equivalent_albedo_multiplied_by_cosine_solar_zenith_angle',
-                    'descriptive_name': 'cloud particle size', 'valid_range': [0.0, 1.0], 'units': '1',
-                    "grid_mapping": "crs"},
-
-        'CMI_C07': {'central_band_wavelength': '3.90',
-                    'long_name': 'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
-                    'standard_name': 'toa_brightness_temperature', 'descriptive_name': 'shortwave window',
-                    'valid_range': [197.31, 411.86], 'units': 'K', "grid_mapping": "crs"},
-
-        'CMI_C08': {'central_band_wavelength': '6.19',
-                    'long_name': 'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
-                    'standard_name': 'toa_brightness_temperature', 'descriptive_name': 'upper-level water vapour',
-                    'valid_range': [138.05, 311.06], 'units': 'K', "grid_mapping": "crs"},
-
-        'CMI_C09': {'central_band_wavelength': '6.93',
-                    'long_name': 'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
-                    'standard_name': 'toa_brightness_temperature', 'descriptive_name': 'mid-level water vapour',
-                    'valid_range': [137.7, 311.08], 'units': 'K', "grid_mapping": "crs"},
-
-        'CMI_C10': {'central_band_wavelength': '7.34',
-                    'long_name': 'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
-                    'standard_name': 'toa_brightness_temperature', 'descriptive_name': 'low-level water vapour',
-                    'valid_range': [126.91, 331.2], 'units': 'K', "grid_mapping": "crs"},
-
-        'CMI_C11': {'central_band_wavelength': '8.44',
-                    'long_name': 'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
-                    'standard_name': 'toa_brightness_temperature', 'descriptive_name': 'cloud-top phase',
-                    'valid_range': [127.69, 341.3], 'units': 'K', "grid_mapping": "crs"},
-
-        'CMI_C12': {'central_band_wavelength': '9.61',
-                    'long_name': 'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
-                    'standard_name': 'toa_brightness_temperature', 'descriptive_name': 'ozone',
-                    'valid_range': [117.49, 311.06], 'units': 'K', "grid_mapping": "crs"},
-
-        'CMI_C13': {'central_band_wavelength': '10.33',
-                    'long_name': 'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
-                    'standard_name': 'toa_brightness_temperature', 'descriptive_name': 'clean longwave window',
-                    'valid_range': [89.62, 341.27], 'units': 'K', "grid_mapping": "crs"},
-
-        'CMI_C14': {'central_band_wavelength': '11.21',
-                    'long_name': 'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
-                    'standard_name': 'toa_brightness_temperature', 'descriptive_name': 'longwave window',
-                    'valid_range': [96.19, 341.28], 'units': 'K', "grid_mapping": "crs"},
-
-        'CMI_C15': {'central_band_wavelength': '12.29',
-                    'long_name': 'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
-                    'standard_name': 'toa_brightness_temperature', 'descriptive_name': 'dirty longwave window',
-                    'valid_range': [97.38, 341.28], 'units': 'K', "grid_mapping": "crs"},
-
-        'CMI_C16': {'central_band_wavelength': '13.28',
-                    'long_name': 'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
-                    'standard_name': 'toa_brightness_temperature', 'descriptive_name': 'carbon dioxide',
-                    'valid_range': [92.7, 318.26], 'units': 'K', "grid_mapping": "crs"}
+        'CMI_C01':{'central_band_wavelength':'0.47', 'long_name':'ABI Cloud and Moisture Imagery reflectance factor',
+                  'standard_name':'toa_lambertian_equivalent_albedo_multiplied_by_cosine_solar_zenith_angle', 
+                  'descriptive_name':'blue', 'valid_range':[0.0,1.0], 'units':'1', "grid_mapping": "crs", "coordinates":"crs"},
+        'CMI_C02':{'central_band_wavelength':'0.64', 'long_name':'ABI Cloud and Moisture Imagery reflectance factor',
+                  'standard_name':'toa_lambertian_equivalent_albedo_multiplied_by_cosine_solar_zenith_angle',
+                  'descriptive_name':'red', 'valid_range':[0.0,1.0], 'units':'1', "grid_mapping": "crs", "coordinates":"crs"}, 
+        'CMI_C03':{'central_band_wavelength':'0.86', 'long_name':'ABI Cloud and Moisture Imagery reflectance factor',
+                  'standard_name':'toa_lambertian_equivalent_albedo_multiplied_by_cosine_solar_zenith_angle',
+                  'descriptive_name':'vegetation', 'valid_range':[0.0,1.0], 'units':'1', "grid_mapping": "crs", "coordinates":"crs"}, 
+        'CMI_C04':{'central_band_wavelength':'1.37', 'long_name':'ABI Cloud and Moisture Imagery reflectance factor',
+                  'standard_name':'toa_lambertian_equivalent_albedo_multiplied_by_cosine_solar_zenith_angle',
+                  'descriptive_name':'cirrus', 'valid_range':[0.0,1.0], 'units':'1', "grid_mapping": "crs", "coordinates":"crs"},
+        'CMI_C05':{'central_band_wavelength':'1.61', 'long_name':'ABI Cloud and Moisture Imagery reflectance factor',
+                  'standard_name':'toa_lambertian_equivalent_albedo_multiplied_by_cosine_solar_zenith_angle',
+                  'descriptive_name':'snow/ice', 'valid_range':[0.0,1.0], 'units':'1', "grid_mapping": "crs", "coordinates":"crs"},
+        'CMI_C06':{'central_band_wavelength':'2.24', 'long_name':'ABI Cloud and Moisture Imagery reflectance factor',
+                  'standard_name':'toa_lambertian_equivalent_albedo_multiplied_by_cosine_solar_zenith_angle',
+                  'descriptive_name':'cloud particle size', 'valid_range':[0.0,1.0], 'units':'1', "grid_mapping": "crs", "coordinates":"crs"},
+        'CMI_C07':{'central_band_wavelength':'3.90', 'long_name':'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
+                  'standard_name':'toa_brightness_temperature', 'descriptive_name':'shortwave window',
+                  'valid_range':[197.31, 411.86], 'units':'K',"grid_mapping": "crs", "coordinates":"crs"},
+        'CMI_C08':{'central_band_wavelength':'6.19', 'long_name':'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
+                  'standard_name':'toa_brightness_temperature', 'descriptive_name':'upper-level water vapour',
+                  'valid_range':[138.05, 311.06], 'units':'K', "grid_mapping": "crs", "coordinates":"crs"},
+        'CMI_C09':{'central_band_wavelength':'6.93', 'long_name':'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
+                  'standard_name':'toa_brightness_temperature', 'descriptive_name':'mid-level water vapour',
+                  'valid_range':[137.7 , 311.08], 'units':'K', "grid_mapping": "crs", "coordinates":"crs"},
+        'CMI_C10':{'central_band_wavelength':'7.34', 'long_name':'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
+                  'standard_name':'toa_brightness_temperature', 'descriptive_name':'low-level water vapour', 
+                  'valid_range':[126.91, 331.2 ], 'units':'K', "grid_mapping": "crs", "coordinates":"crs"},
+        'CMI_C11':{'central_band_wavelength':'8.44', 'long_name':'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
+                  'standard_name':'toa_brightness_temperature', 'descriptive_name':'cloud-top phase',
+                  'valid_range':[127.69, 341.3 ], 'units':'K',"grid_mapping": "crs", "coordinates":"crs"},
+        'CMI_C12':{'central_band_wavelength':'9.61', 'long_name':'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
+                  'standard_name':'toa_brightness_temperature', 'descriptive_name':'ozone', 
+                  'valid_range':[117.49, 311.06], 'units':'K', "grid_mapping": "crs", "coordinates":"crs"},
+        'CMI_C13':{'central_band_wavelength':'10.33', 'long_name':'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
+                  'standard_name':'toa_brightness_temperature', 'descriptive_name':'clean longwave window',
+                  'valid_range':[ 89.62, 341.27], 'units':'K', "grid_mapping": "crs", "coordinates":"crs"},
+        'CMI_C14':{'central_band_wavelength':'11.21', 'long_name':'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere', 
+                  'standard_name':'toa_brightness_temperature', 'descriptive_name':'longwave window',
+                  'valid_range':[ 96.19, 341.28], 'units':'K', "grid_mapping": "crs", "coordinates":"crs"},
+        'CMI_C15':{'central_band_wavelength':'12.29', 'long_name':'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
+                  'standard_name':'toa_brightness_temperature', 'descriptive_name':'dirty longwave window',
+                  'valid_range':[ 97.38, 341.28], 'units':'K', "grid_mapping": "crs", "coordinates":"crs"},
+        'CMI_C16':{'central_band_wavelength':'13.28', 'long_name':'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
+                  'standard_name':'toa_brightness_temperature', 'descriptive_name':'carbon dioxide',
+                  'valid_range':[ 92.7 , 318.26], 'units':'K', "grid_mapping": "crs", "coordinates":"crs"}
     }
 
     # Satellite specific metadata - GOES 16
@@ -143,6 +117,49 @@ class SatelliteConfig:
         "epsg_code": "EPSG:4326"
     }
 
+    GOES16_LAT_LON_METADATA = {
+        "lat": {
+            "standard_name": "latitude",
+            "long_name": "Latitude",
+            "units": "degrees_north",
+            "axis": "Y",
+            "valid_min": -81.3282,
+            "valid_max": 81.3282,
+            "comment": "WGS84 latitude grid for GOES-16 regridded data",
+        },
+        "lon" : {
+            "standard_name": "longitude",
+            "long_name": "Longitude",
+            "units": "degrees_east",
+            "axis": "X",
+            "valid_min": -156.2995,  # Specific to GOES-16's domain
+            "valid_max": 6.2995,
+            "comment": "WGS84 longitude grid for GOES-16 (CONUS/Atlantic focus)",
+        },
+    }
+
+    GOES18_LAT_LON_METADATA = {
+        "lat": {
+            "standard_name": "latitude",
+            "long_name": "Latitude",
+            "units": "degrees_north",
+            "axis": "Y",
+            "valid_min": -81.3282,
+            "valid_max": 81.3282,
+            "comment": "WGS84 latitude grid for GOES-18 regridded data"
+        },
+        "lon": {
+            "standard_name": "longitude",
+            "long_name": "Longitude",
+            "units": "degrees_east",
+            "axis": "X",
+            "valid_min": -180.0,  # Adjusted for longitude wrapping
+            "valid_max": 180.0,
+            "comment": "WGS84 longitude grid (values >180 wrapped to -180) for GOES-18"
+        }
+    }
+
+    
     # Discarded variables
     UNUSED_DS_VARIABLES = ['goes_imager_projection', 'nominal_satellite_subpoint_lat', 'nominal_satellite_subpoint_lon', 'nominal_satellite_height', 'geospatial_lat_lon_extent', 'band_wavelength_C01', 'band_wavelength_C02',
                            'band_wavelength_C03', 'band_wavelength_C04', 'band_wavelength_C05', 'band_wavelength_C06', 'band_wavelength_C07', 'band_wavelength_C08', 'band_wavelength_C09', 'band_wavelength_C10', 'band_wavelength_C11',
@@ -258,8 +275,6 @@ class GOESProcessor:
         :param chunks: Zarr chunk dimensions
         :param batch_size: Number of files to process per batch
         """
-        batch_size = chunks[0]
-
         # Initialize components
         sample_ds = xr.open_dataset(file_paths[0], chunks='auto', drop_variables=self.config.UNUSED_DS_VARIABLES)
 
@@ -284,12 +299,14 @@ class GOESProcessor:
         # Create coordinate arrays
         if 'lat' not in self.root_group:
             lat = zarr.create_array(self.zarr_store, name='lat', shape=sample_ds['lat'].values.shape, dtype=np.float32,
-                                   attributes={}, dimension_names=['lat'])
+                                    attributes=self.config.GOES18_LAT_LON_METADATA['lat'] if 'west' in satellite else self.config.GOES16_LAT_LON_METADATA['lat'],
+                                    dimension_names=['lat'])
             lat[:] = sample_ds['lat'].values
 
         if 'lon' not in self.root_group:
             lon = zarr.create_array(self.zarr_store, name='lon', shape=sample_ds['lon'].values.shape, dtype=np.float32,
-                                   attributes={}, dimension_names=['lon'])
+                                   attributes=self.config.GOES18_LAT_LON_METADATA['lon'] if 'west' in satellite else self.config.GOES16_LAT_LON_METADATA['lon'],
+                                   dimension_names=['lon'])
             lon[:] = sample_ds['lon'].values
 
         def process_band(da, band):
@@ -307,10 +324,11 @@ class GOESProcessor:
                                        chunks=chunks, dimension_names=['t', 'lat', 'lon'],
                                        compressors=self.compressors, shards=shards)
                 za[:] = ds_regrid.values
-
+        
+        batch_size = chunks[0]
         # Process in batches
         # iterate through each batch
-        for i in range(0, len(file_paths), batch_size or chunks[0]):
+        for i in range(0, len(file_paths), batch_size):
             # Open and concatenate files
             ds = self.add_coordinates(xr.open_mfdataset(
                 file_paths[i: min(len(file_paths), i + batch_size)],
@@ -329,7 +347,8 @@ class GOESProcessor:
                 ta.append(encoded_time)
             else:
                 ta = zarr.create_array(self.zarr_store, name="t", shape=encoded_time.shape, dtype=np.float32,
-                                       attributes={"units": dt_units, "calendar": dt_calendar}, dimension_names=['t'])
+                                       attributes={"units": dt_units, "calendar": dt_calendar, "standard_name": "time"},
+                                       dimension_names=['t'])
                 ta[:] = encoded_time
             
             # Process bands
