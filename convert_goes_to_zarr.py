@@ -205,8 +205,8 @@ class SatelliteConfig:
             "long_name": "Longitude",
             "units": "degrees_east",
             "axis": "X",
-            "valid_min": -180.0,  # Adjusted for longitude wrapping
-            "valid_max": 180.0,
+            "valid_min": 141.7005,  # Adjusted for longitude wrapping
+            "valid_max": 304.2995,
             "comment": "WGS84 longitude grid (values >180 wrapped to -180) for GOES-18"
         }
     }
