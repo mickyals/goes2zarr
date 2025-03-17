@@ -1,0 +1,11 @@
+zarr
+xarray
+numpy
+pyproj
+xesmf
+shapely 
+cf_xarray 
+sparse 
+numba
+netcdf4
+dask
