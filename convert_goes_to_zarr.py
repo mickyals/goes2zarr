@@ -68,7 +68,7 @@ class SatelliteConfig:
     def UNIVERSAL_BAND_METADATA(self):
         return self._CMI_UNIVERSAL_BAND_METADATA | \
                 (self._DQF_UNIVERSAL_BAND_METADATA if self._include_dq else {}) | \
-                (self._EXTRA_UNIVERSAL_BAND_METADATA if self._include_all else [])
+                (self._EXTRA_UNIVERSAL_BAND_METADATA if self._include_all else {})
 
 
     # Band specific metadata
