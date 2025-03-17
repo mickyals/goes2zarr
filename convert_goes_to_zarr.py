@@ -361,7 +361,7 @@ class GOESProcessor:
         for i in range(0, len(file_paths), batch_size):
             # Open and concatenate files
             batch_end = min(len(file_paths), i + batch_size)
-            LOGGER.debug("Starting batch of files from '%s' to '%s' (indexes %d to %d)", file_paths[i], file_paths[batch_end], i, batch_end)
+            LOGGER.debug("Starting batch of files from '%s' to '%s' (indexes %d to %d)", file_paths[i], file_paths[batch_end - 1], i, batch_end)
             ds = self.add_coordinates(xr.open_mfdataset(
                 file_paths[i: batch_end],
                 combine="nested",
@@ -406,14 +406,14 @@ def get_target_grid_file(satellite, grid_lon_extent):
     return grid_file
 
 
-def configure_logger(verbosity_level, log_file = None):
+def configure_logger(verbosity_level):
     if verbosity_level < 1:
         log_level = logging.CRITICAL
     elif verbosity_level == 1:
         log_level = logging.INFO
     else:
         log_level = logging.DEBUG
-    logging.basicConfig(level=log_level, filename=log_file)
+    logging.basicConfig(level=log_level)
 
 
 def check_weight_file(regridder_weight_file, satellite):
@@ -433,11 +433,10 @@ if __name__ == "__main__":
     parser.add_argument("--satellite", required=True, choices=["west", "east"], help="Satellite name of the dataset trying to convert. Should be one of west (goes18) or east (goes16).")
     parser.add_argument("--include-data-quality-vars", action="store_true", help="Include DQI_* variables in the output zarr files. Default is to only include CMI_* variables.")
     parser.add_argument("--include-all-vars", action="store_true", help="Include all variables (including DQI_* and others) in the output zarr files. Default is to only include CMI_* variables.")
-    parser.add_argument("--log-file", help="Path to a file to write logs to. Default is to log to stderr")
     parser.add_argument("-v", "--verbose", action="count", default=0, help="Log verbose output")
     args = parser.parse_args()
 
-    configure_logger(args.verbose, args.log_file)
+    configure_logger(args.verbose)
     check_weight_file(args.regridder_weight_file, args.satellite)
 
     file_paths = read_input_files(args.goes_file_list)

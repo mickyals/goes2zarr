@@ -63,5 +63,5 @@ docker run --rm goes2zarr:latest --help
 Example run (basic):
 
 ```sh
-docker run -v /path/to/filelist/file:/goes-file-list:ro -v /path/to/downloaded/goeswest_regridder.nc:/goeswest_regridder.nc:ro -v ./result.zarr:/result.zarr:rw --rm goes2zarr:latest --goes-file-list /goes-file-list --satellite west --regridder-weight-file /goeswest_regridder.nc --store-path /result.zarr
+docker run -v /path/to/filelist/file:/goes-file-list:ro -v /path/to/downloaded/goeswest_regridder.nc:/goeswest_regridder.nc:ro -v ./tmp/:/result/:rw --rm goes2zarr:latest --goes-file-list /goes-file-list --satellite west --regridder-weight-file /goeswest_regridder.nc --store-path /result/result.zarr
 ```
