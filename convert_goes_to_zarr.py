@@ -441,7 +441,7 @@ if __name__ == "__main__":
 
     file_paths = read_input_files(args.goes_file_list)
     config = SatelliteConfig(args.include_data_quality_vars, args.include_all_vars)
-    processor = GOESProcessor(args.satellite, config)
+    processor = GOESProcessor(args.satellite, config, compressors=zarr.codecs.BloscCodec(cname='zstd', clevel=4, shuffle=zarr.codecs.BloscShuffle.bitshuffle)) 
 
     processor.process_files(
         file_paths=file_paths,
