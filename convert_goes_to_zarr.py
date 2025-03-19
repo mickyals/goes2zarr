@@ -372,13 +372,13 @@ class GOESProcessor:
 
             # Encode time values
             encoded_time, _, _ = xr.coding.times.encode_cf_datetime(ds['t'].values, units=dt_units,
-                                                                    calendar=dt_calendar)
+                                                                    calendar=dt_calendar, dtype=np.float64)
             # Write time values to Zarr
             if 't' in self.root_group:
                 ta = zarr.open_array(self.zarr_store, path="t")
                 ta.append(encoded_time)
             else:
-                ta = zarr.create_array(self.zarr_store, name="t", shape=encoded_time.shape, dtype=np.float32,
+                ta = zarr.create_array(self.zarr_store, name="t", shape=encoded_time.shape, dtype=np.float64,
                                        attributes={"units": dt_units, "calendar": dt_calendar, "standard_name": "time"},
                                        dimension_names=['t'])
                 ta[:] = encoded_time
