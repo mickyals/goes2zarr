@@ -441,7 +441,7 @@ if __name__ == "__main__":
 
     file_paths = read_input_files(args.goes_file_list)
     config = SatelliteConfig(args.include_data_quality_vars, args.include_all_vars)
-    processor = GOESProcessor(args.satellite, config, compressors=zarr.codecs.BloscCodec(cname='zstd', clevel=4, shuffle=zarr.codecs.BloscShuffle.bitshuffle)) 
+    processor = GOESProcessor(args.satellite, config, compressors=zarr.codecs.BloscCodec(cname='zstd', clevel=9, shuffle=zarr.codecs.BloscShuffle.bitshuffle)) 
 
     processor.process_files(
         file_paths=file_paths,
@@ -449,5 +449,5 @@ if __name__ == "__main__":
         target_grid_file=get_target_grid_file(args.satellite, args.grid_lon_extent),
         regridder_weights=args.regridder_weight_file,
         satellite=args.satellite,
-        chunks=(args.chunk_size, 256, 256)
+        chunks=(args.chunk_size, 512, 512)
     )
