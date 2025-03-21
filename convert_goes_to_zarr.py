@@ -433,6 +433,7 @@ if __name__ == "__main__":
     parser.add_argument("--satellite", required=True, choices=["west", "east"], help="Satellite name of the dataset trying to convert. Should be one of west (goes18) or east (goes16).")
     parser.add_argument("--include-data-quality-vars", action="store_true", help="Include DQI_* variables in the output zarr files. Default is to only include CMI_* variables.")
     parser.add_argument("--include-all-vars", action="store_true", help="Include all variables (including DQI_* and others) in the output zarr files. Default is to only include CMI_* variables.")
+    parser.add_argument("--compression-level", type=int, default=9, help="Compression level for the zarr output data.")
     parser.add_argument("-v", "--verbose", action="count", default=0, help="Log verbose output")
     args = parser.parse_args()
 
@@ -441,7 +442,7 @@ if __name__ == "__main__":
 
     file_paths = read_input_files(args.goes_file_list)
     config = SatelliteConfig(args.include_data_quality_vars, args.include_all_vars)
-    processor = GOESProcessor(args.satellite, config, compressors=zarr.codecs.BloscCodec(cname='zstd', clevel=9, shuffle=zarr.codecs.BloscShuffle.bitshuffle)) 
+    processor = GOESProcessor(args.satellite, config, compressors=zarr.codecs.BloscCodec(cname='zstd', clevel=args.compression_level, shuffle=zarr.codecs.BloscShuffle.bitshuffle)) 
 
     processor.process_files(
         file_paths=file_paths,
