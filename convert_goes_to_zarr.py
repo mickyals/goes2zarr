@@ -218,12 +218,13 @@ class SatelliteConfig:
 #
 
 class GOESProcessor:
-    def __init__(self, satellite: str, config: SatelliteConfig = SatelliteConfig(), compressors="auto"):
+    def __init__(self, satellite: str, config: SatelliteConfig = SatelliteConfig(), compressors="auto", serializer="auto"):
         self.config = config
         self.regridder = None
         self.zarr_store = None
         self.root_group = None
         self.compressors = compressors
+        self.serializer = serializer
         self.proj_params = {
             'a': 6378137.0,
             'b': 6356752.31414,
@@ -291,7 +292,7 @@ class GOESProcessor:
             za = zarr.create_array(self.zarr_store, name=band, shape=ds_regrid.values.shape, dtype=np.float32,
                                     attributes=self.config.UNIVERSAL_BAND_METADATA[band],
                                     chunks=chunks, dimension_names=['t', 'lat', 'lon'],
-                                    compressors=self.compressors, shards=shards)
+                                    compressors=self.compressors, serializer=self.serializer, shards=shards)
             za[:] = ds_regrid.values
 
     # --------------------------
@@ -435,8 +436,8 @@ if __name__ == "__main__":
     parser.add_argument("--satellite", required=True, choices=["west", "east"], help="Satellite name of the dataset trying to convert. Should be one of west (goes18) or east (goes16).")
     parser.add_argument("--include-data-quality-vars", action="store_true", help="Include DQI_* variables in the output zarr files. Default is to only include CMI_* variables.")
     parser.add_argument("--include-all-vars", action="store_true", help="Include all variables (including DQI_* and others) in the output zarr files. Default is to only include CMI_* variables.")
-    parser.add_argument("--compression-level", type=int, default=9, help="Compression level for the zarr output data.")
-    parser.add_argument("--compression-codec", default="zstd", choices=["zstd", "pcodec"], help="Compression codec to use when compressing zarr output data.")
+    parser.add_argument("--compressor-level", type=int, default=9, help="Compression level for compression codec (Zstd) used to compress the zarr output data.")
+    parser.add_argument("--serializer-level", type=int, default=9, help="Compression level for serializer codec (PCodec) used to compress the zarr output data.")
     parser.add_argument("-v", "--verbose", action="count", default=0, help="Log verbose output")
     args = parser.parse_args()
 
@@ -445,11 +446,7 @@ if __name__ == "__main__":
 
     file_paths = read_input_files(args.goes_file_list)
     config = SatelliteConfig(args.include_data_quality_vars, args.include_all_vars)
-    if args.compression_codec == "zstd":
-        compressor = zarr.codecs.ZstdCodec(level=args.compression_level)
-    else:
-        compressor = PCodec(level=args.compression_level)
-    processor = GOESProcessor(args.satellite, config, compressors=compressor)
+    processor = GOESProcessor(args.satellite, config, compressors=zarr.codecs.ZstdCodec(level=args.compressor_level), serializer=PCodec(level=args.serializer_level))
 
     processor.process_files(
         file_paths=file_paths,
