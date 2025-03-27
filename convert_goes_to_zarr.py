@@ -10,6 +10,7 @@ import pathlib
 import zarr
 import xarray as xr
 import numpy as np
+from numcodecs.zarr3 import PCodec
 import pyproj
 import xesmf as xe
 import concurrent.futures
@@ -429,11 +430,13 @@ if __name__ == "__main__":
     parser.add_argument("--store-path", default="./goes_conversion.zarr", help="Directory store the output files, should be a new directory unless adding more data to an existing directory")
     parser.add_argument("--grid-lon-extent", default="0-360", choices=["0-360", "+-180"], help="Longitude range of the grid that data will be mapped to. Choices are 0 to 360 degrees or -180 to 180 degrees.")
     parser.add_argument("--regridder-weight-file", help="Path to the regridding weight file.")
-    parser.add_argument("--chunk-size", default=336, help="Chunk size across timesteps. Redundant if appending new data.")
+    parser.add_argument("--temporal-chunk-size", default=24, help="Chunk size across timesteps. Redundant if appending new data.")
+    parser.add_argument("--spatial-chunk-size", default=512, help="Chunk size across spatial extent. Redundant if appending new data.")
     parser.add_argument("--satellite", required=True, choices=["west", "east"], help="Satellite name of the dataset trying to convert. Should be one of west (goes18) or east (goes16).")
     parser.add_argument("--include-data-quality-vars", action="store_true", help="Include DQI_* variables in the output zarr files. Default is to only include CMI_* variables.")
     parser.add_argument("--include-all-vars", action="store_true", help="Include all variables (including DQI_* and others) in the output zarr files. Default is to only include CMI_* variables.")
     parser.add_argument("--compression-level", type=int, default=9, help="Compression level for the zarr output data.")
+    parser.add_argument("--compression-codec", default="zstd", choices=["zstd", "pcodec"], help="Compression codec to use when compressing zarr output data.")
     parser.add_argument("-v", "--verbose", action="count", default=0, help="Log verbose output")
     args = parser.parse_args()
 
@@ -442,7 +445,11 @@ if __name__ == "__main__":
 
     file_paths = read_input_files(args.goes_file_list)
     config = SatelliteConfig(args.include_data_quality_vars, args.include_all_vars)
-    processor = GOESProcessor(args.satellite, config, compressors=zarr.codecs.ZstdCodec(level=args.compression_level))
+    if args.compression_codec == "zstd":
+        compressor = zarr.codecs.ZstdCodec(level=args.compression_level)
+    else:
+        compressor = PCodec(level=args.compression_level)
+    processor = GOESProcessor(args.satellite, config, compressors=compressor)
 
     processor.process_files(
         file_paths=file_paths,
@@ -450,5 +457,5 @@ if __name__ == "__main__":
         target_grid_file=get_target_grid_file(args.satellite, args.grid_lon_extent),
         regridder_weights=args.regridder_weight_file,
         satellite=args.satellite,
-        chunks=(args.chunk_size, 512, 512)
+        chunks=(args.temporal_chunk_size, args.spatial_chunk_size, args.spatial_chunk_size)
     )

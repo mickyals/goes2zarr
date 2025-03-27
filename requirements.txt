@@ -9,3 +9,4 @@ sparse
 numba
 netcdf4
 dask
+numcodecs[pcodec]
