@@ -298,7 +298,7 @@ class GOESProcessor:
         ds_regrid = self.regridder(da).chunk(chunks)
 
         # Apply mask: set values to NaN where mask is 0
-        ds_regrid = ds_regrid.where(mask != 0, np.nan)
+        ds_regrid = ds_regrid.where(mask, np.nan)
         
         # TODO: floor every DQF_CXX band (floor all values in band if the name of the band is DQF...)
         scale_factor = self.config.UNIVERSAL_BAND_METADATA[band]['scale_factor']
@@ -355,7 +355,7 @@ class GOESProcessor:
         )
 
         sample_ds = self.regridder(sample_ds['CMI_C07'])
-        mask = sample_ds.where(sample_ds < 197.3).values
+        mask = sample_ds >= 197.31
 
         # Initialize Zarr store
         self.initialize_zarr_store(store_name, self.config.GOES18_METADATA if 'west' in satellite else self.config.GOES16_METADATA)
