@@ -355,7 +355,7 @@ class GOESProcessor:
         )
 
         sample_ds = self.regridder(sample_ds['CMI_C07'])
-        mask = sample_ds >= 197.31
+        mask = sample_ds >= 197.3
 
         # Initialize Zarr store
         self.initialize_zarr_store(store_name, self.config.GOES18_METADATA if 'west' in satellite else self.config.GOES16_METADATA)
