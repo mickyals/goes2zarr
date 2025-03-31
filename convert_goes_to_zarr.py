@@ -77,69 +77,58 @@ class SatelliteConfig:
     _CMI_UNIVERSAL_BAND_METADATA = {
         'CMI_C01':{'central_band_wavelength':'0.47', 'long_name':'ABI Cloud and Moisture Imagery reflectance factor',
                   'standard_name':'toa_lambertian_equivalent_albedo_multiplied_by_cosine_solar_zenith_angle', 
-                  'descriptive_name':'blue', 'valid_range':[0.0,1.0], 'units':'1', "grid_mapping": "crs", "coordinates":"crs",
-                  "scale_factor": 1/UINT16_MAX, "add_offset":0.0},
+                  'descriptive_name':'blue', 'valid_range':[0.0,1.0], 'units':'1', "grid_mapping": "crs", "coordinates":"crs"},
         'CMI_C02':{'central_band_wavelength':'0.64', 'long_name':'ABI Cloud and Moisture Imagery reflectance factor',
                   'standard_name':'toa_lambertian_equivalent_albedo_multiplied_by_cosine_solar_zenith_angle',
-                  'descriptive_name':'red', 'valid_range':[0.0,1.0], 'units':'1', "grid_mapping": "crs", "coordinates":"crs",
-                  "scale_factor": 1/UINT16_MAX, "add_offset":0.0}, 
+                  'descriptive_name':'red', 'valid_range':[0.0,1.0], 'units':'1', "grid_mapping": "crs", "coordinates":"crs"}, 
         'CMI_C03':{'central_band_wavelength':'0.86', 'long_name':'ABI Cloud and Moisture Imagery reflectance factor',
                   'standard_name':'toa_lambertian_equivalent_albedo_multiplied_by_cosine_solar_zenith_angle',
-                  'descriptive_name':'vegetation', 'valid_range':[0.0,1.0], 'units':'1', "grid_mapping": "crs", "coordinates":"crs",
-                  "scale_factor": 1/UINT16_MAX, "add_offset":0.0}, 
+                  'descriptive_name':'vegetation', 'valid_range':[0.0,1.0], 'units':'1', "grid_mapping": "crs", "coordinates":"crs"}, 
         'CMI_C04':{'central_band_wavelength':'1.37', 'long_name':'ABI Cloud and Moisture Imagery reflectance factor',
                   'standard_name':'toa_lambertian_equivalent_albedo_multiplied_by_cosine_solar_zenith_angle',
-                  'descriptive_name':'cirrus', 'valid_range':[0.0,1.0], 'units':'1', "grid_mapping": "crs", "coordinates":"crs",
-                  "scale_factor": 1/UINT16_MAX, "add_offset":0.0},
+                  'descriptive_name':'cirrus', 'valid_range':[0.0,1.0], 'units':'1', "grid_mapping": "crs", "coordinates":"crs"},
         'CMI_C05':{'central_band_wavelength':'1.61', 'long_name':'ABI Cloud and Moisture Imagery reflectance factor',
                   'standard_name':'toa_lambertian_equivalent_albedo_multiplied_by_cosine_solar_zenith_angle',
-                  'descriptive_name':'snow/ice', 'valid_range':[0.0,1.0], 'units':'1', "grid_mapping": "crs", "coordinates":"crs",
-                  "scale_factor": 1/UINT16_MAX, "add_offset":0.0},
+                  'descriptive_name':'snow/ice', 'valid_range':[0.0,1.0], 'units':'1', "grid_mapping": "crs", "coordinates":"crs"},
         'CMI_C06':{'central_band_wavelength':'2.24', 'long_name':'ABI Cloud and Moisture Imagery reflectance factor',
                   'standard_name':'toa_lambertian_equivalent_albedo_multiplied_by_cosine_solar_zenith_angle',
-                  'descriptive_name':'cloud particle size', 'valid_range':[0.0,1.0], 'units':'1', "grid_mapping": "crs", "coordinates":"crs",
-                  "scale_factor": 1/UINT16_MAX, "add_offset":0.0},
+                  'descriptive_name':'cloud particle size', 'valid_range':[0.0,1.0], 'units':'1', "grid_mapping": "crs", "coordinates":"crs"},
         'CMI_C07':{'central_band_wavelength':'3.90', 'long_name':'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
                   'standard_name':'toa_brightness_temperature', 'descriptive_name':'shortwave window',
-                  'valid_range':[197.31, 411.86], 'units':'K',"grid_mapping": "crs", "coordinates":"crs",
-                  "scale_factor": 214.55/UINT16_MAX, "add_offset":197.31},
+                  'valid_range':[197.31, 411.86], 'units':'K',"grid_mapping": "crs", "coordinates":"crs"},
         'CMI_C08':{'central_band_wavelength':'6.19', 'long_name':'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
                   'standard_name':'toa_brightness_temperature', 'descriptive_name':'upper-level water vapour',
-                  'valid_range':[138.05, 311.06], 'units':'K', "grid_mapping": "crs", "coordinates":"crs",
-                  "scale_factor": 173.01/UINT16_MAX, "add_offset":138.05},
+                  'valid_range':[138.05, 311.06], 'units':'K', "grid_mapping": "crs", "coordinates":"crs"},
         'CMI_C09':{'central_band_wavelength':'6.93', 'long_name':'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
                   'standard_name':'toa_brightness_temperature', 'descriptive_name':'mid-level water vapour',
-                  'valid_range':[137.7 , 311.08], 'units':'K', "grid_mapping": "crs", "coordinates":"crs",
-                  "scale_factor": 173.38/UINT16_MAX, "add_offset":137.7},
+                  'valid_range':[137.7 , 311.08], 'units':'K', "grid_mapping": "crs", "coordinates":"crs"},
         'CMI_C10':{'central_band_wavelength':'7.34', 'long_name':'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
                   'standard_name':'toa_brightness_temperature', 'descriptive_name':'low-level water vapour', 
-                  'valid_range':[126.91, 331.2 ], 'units':'K', "grid_mapping": "crs", "coordinates":"crs",
-                  "scale_factor": 204.29/UINT16_MAX, "add_offset":126.91},
+                  'valid_range':[126.91, 331.2 ], 'units':'K', "grid_mapping": "crs", "coordinates":"crs"},
         'CMI_C11':{'central_band_wavelength':'8.44', 'long_name':'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
                   'standard_name':'toa_brightness_temperature', 'descriptive_name':'cloud-top phase',
-                  'valid_range':[127.69, 341.3 ], 'units':'K',"grid_mapping": "crs", "coordinates":"crs",
-                  "scale_factor": 213.61/UINT16_MAX, "add_offset":127.69},
+                  'valid_range':[127.69, 341.3 ], 'units':'K',"grid_mapping": "crs", "coordinates":"crs"},
         'CMI_C12':{'central_band_wavelength':'9.61', 'long_name':'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
                   'standard_name':'toa_brightness_temperature', 'descriptive_name':'ozone', 
-                  'valid_range':[117.49, 311.06], 'units':'K', "grid_mapping": "crs", "coordinates":"crs",
-                  "scale_factor": 193.57/UINT16_MAX, "add_offset":117.49},
+                  'valid_range':[117.49, 311.06], 'units':'K', "grid_mapping": "crs", "coordinates":"crs"},
         'CMI_C13':{'central_band_wavelength':'10.33', 'long_name':'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
                   'standard_name':'toa_brightness_temperature', 'descriptive_name':'clean longwave window',
-                  'valid_range':[ 89.62, 341.27], 'units':'K', "grid_mapping": "crs", "coordinates":"crs",
-                  "scale_factor": 251.65/UINT16_MAX, "add_offset":89.62},
+                  'valid_range':[ 89.62, 341.27], 'units':'K', "grid_mapping": "crs", "coordinates":"crs"},
         'CMI_C14':{'central_band_wavelength':'11.21', 'long_name':'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere', 
                   'standard_name':'toa_brightness_temperature', 'descriptive_name':'longwave window',
-                  'valid_range':[ 96.19, 341.28], 'units':'K', "grid_mapping": "crs", "coordinates":"crs",
-                  "scale_factor": 245.09/UINT16_MAX, "add_offset":96.19},
+                  'valid_range':[ 96.19, 341.28], 'units':'K', "grid_mapping": "crs", "coordinates":"crs"},
         'CMI_C15':{'central_band_wavelength':'12.29', 'long_name':'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
                   'standard_name':'toa_brightness_temperature', 'descriptive_name':'dirty longwave window',
-                  'valid_range':[ 97.38, 341.28], 'units':'K', "grid_mapping": "crs", "coordinates":"crs",
-                  "scale_factor": 243.9/UINT16_MAX, "add_offset":97.38},
+                  'valid_range':[ 97.38, 341.28], 'units':'K', "grid_mapping": "crs", "coordinates":"crs"},
         'CMI_C16':{'central_band_wavelength':'13.28', 'long_name':'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
                   'standard_name':'toa_brightness_temperature', 'descriptive_name':'carbon dioxide',
-                  'valid_range':[ 92.7 , 318.26], 'units':'K', "grid_mapping": "crs", "coordinates":"crs",
-                  "scale_factor": 225.56/UINT16_MAX, "add_offset":92.7}
+                  'valid_range':[ 92.7 , 318.26], 'units':'K', "grid_mapping": "crs", "coordinates":"crs"}
     }
+
+    for _meta in _CMI_UNIVERSAL_BAND_METADATA.values():
+        _min, _max = _meta["valid_range"]
+        _meta["scale_factor"] = (_max - _min) / UINT16_MAX
+        _meta["add_offset"] = _min
 
     _DQF_UNIVERSAL_BAND_METADATA = {k: {"flag_values": [0, 1, 2, 3, 4], "flag_meanings": "good_pixel_qf conditionally_usable_pixel_qf out_of_range_pixel_qf no_value_pixel_qf focal_plane_temperature_threshold_exceeded_qf"} for k in _DQF_VARS}
     _EXTRA_UNIVERSAL_BAND_METADATA = {k: {} for k in _EXTRA_VARS}
@@ -354,8 +343,10 @@ class GOESProcessor:
             weights=regridder_weights
         )
 
-        sample_ds = self.regridder(sample_ds['CMI_C07'])
-        mask = sample_ds >= 197.3
+        sample_band = 'CMI_C07'
+        sample_ds = self.regridder(sample_ds[sample_band])
+        sample_min, _ = self.config.UNIVERSAL_BAND_METADATA[sample_band]["valid_range"]
+        mask = np.round(sample_ds, 2) >= sample_min
 
         # Initialize Zarr store
         self.initialize_zarr_store(store_name, self.config.GOES18_METADATA if 'west' in satellite else self.config.GOES16_METADATA)
