@@ -127,8 +127,9 @@ class SatelliteConfig:
 
     for _meta in _CMI_UNIVERSAL_BAND_METADATA.values():
         _min, _max = _meta["valid_range"]
-        _meta["scale_factor"] = (_max - _min) / UINT16_MAX
+        _meta["scale_factor"] = (_max - _min) / (UINT16_MAX - 1)
         _meta["add_offset"] = _min
+        _meta["_FillValue"] = UINT16_MAX
 
     _DQF_UNIVERSAL_BAND_METADATA = {k: {"flag_values": [0, 1, 2, 3, 4], "flag_meanings": "good_pixel_qf conditionally_usable_pixel_qf out_of_range_pixel_qf no_value_pixel_qf focal_plane_temperature_threshold_exceeded_qf"} for k in _DQF_VARS}
     _EXTRA_UNIVERSAL_BAND_METADATA = {k: {} for k in _EXTRA_VARS}
@@ -286,21 +287,23 @@ class GOESProcessor:
         da = ds[band]
         ds_regrid = self.regridder(da).chunk(chunks)
 
-        # Apply mask: set values to NaN where mask is 0
-        ds_regrid = ds_regrid.where(mask, np.nan)
-        
-        # TODO: floor every DQF_CXX band (floor all values in band if the name of the band is DQF...)
+        # Scale and offset values so they can be stored as uint16 values
         scale_factor = self.config.UNIVERSAL_BAND_METADATA[band]['scale_factor']
         add_offset = self.config.UNIVERSAL_BAND_METADATA[band]['add_offset']
+        ds_regrid = np.rint((ds_regrid.values - add_offset) / scale_factor)
+        # Apply mask: set values to UINT16_MAX where mask is True
+        ds_regrid = np.where(mask, ds_regrid, UINT16_MAX)
+        
+        # TODO: floor every DQF_CXX band (floor all values in band if the name of the band is DQF...)
         if band in self.root_group:
             za = zarr.open_array(self.zarr_store, path=band)
-            za.append(np.rint((ds_regrid.values - add_offset) / scale_factor))
+            za.append(ds_regrid)
         else:
-            za = zarr.create_array(self.zarr_store, name=band, shape=ds_regrid.values.shape, dtype=np.uint16,
+            za = zarr.create_array(self.zarr_store, name=band, shape=ds_regrid.shape, dtype=np.uint16,
                                     attributes=self.config.UNIVERSAL_BAND_METADATA[band],
                                     chunks=chunks, dimension_names=['t', 'lat', 'lon'],
                                     compressors=self.compressors, serializer=self.serializer, shards=shards)
-            za[:] = np.rint((ds_regrid.values - add_offset) / scale_factor)
+            za[:] = ds_regrid
 
     # --------------------------
     # Main Processing Pipeline
