@@ -95,7 +95,7 @@ class SatelliteConfig:
                   'descriptive_name':'cloud particle size', 'valid_range':[0.0,1.0], 'units':'1', "grid_mapping": "crs", "coordinates":"crs"},
         'CMI_C07':{'central_band_wavelength':'3.90', 'long_name':'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
                   'standard_name':'toa_brightness_temperature', 'descriptive_name':'shortwave window',
-                  'valid_range':[197.31, 411.86], 'units':'K',"grid_mapping": "crs", "coordinates":"crs"},
+                  'valid_range':[197.30, 411.86], 'units':'K',"grid_mapping": "crs", "coordinates":"crs"},
         'CMI_C08':{'central_band_wavelength':'6.19', 'long_name':'ABI Cloud and Moisture Imagery brightness temperature at top of atmosphere',
                   'standard_name':'toa_brightness_temperature', 'descriptive_name':'upper-level water vapour',
                   'valid_range':[138.05, 311.06], 'units':'K', "grid_mapping": "crs", "coordinates":"crs"},
