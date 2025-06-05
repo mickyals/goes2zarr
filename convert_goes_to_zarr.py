@@ -285,7 +285,8 @@ class GOESProcessor:
     def process_band(self, band, ds, chunks, mask, shards):
         LOGGER.debug("Processing band '%s'", band)
         da = ds[band]
-        ds_regrid = self.regridder(da).chunk(chunks)
+        dimension_names = ['t', 'lat', 'lon']
+        ds_regrid = self.regridder(da).chunk(dict(zip(dimension_names, chunks)))
 
         # Scale and offset values so they can be stored as uint16 values
         scale_factor = self.config.UNIVERSAL_BAND_METADATA[band]['scale_factor']
@@ -301,7 +302,7 @@ class GOESProcessor:
         else:
             za = zarr.create_array(self.zarr_store, name=band, shape=ds_regrid.shape, dtype=np.uint16,
                                     attributes=self.config.UNIVERSAL_BAND_METADATA[band],
-                                    chunks=chunks, dimension_names=['t', 'lat', 'lon'],
+                                    chunks=chunks, dimension_names=dimension_names,
                                     compressors=self.compressors, serializer=self.serializer, shards=shards)
             za[:] = ds_regrid
 
@@ -450,6 +451,8 @@ if __name__ == "__main__":
     parser.add_argument("--include-all-vars", action="store_true", help="Include all variables (including DQI_* and others) in the output zarr files. Default is to only include CMI_* variables.")
     parser.add_argument("--compressor-level", type=int, default=9, help="Compression level for compression codec (Zstd) used to compress the zarr output data.")
     parser.add_argument("--serializer-level", type=int, default=9, help="Compression level for serializer codec (PCodec) used to compress the zarr output data.")
+    parser.add_argument("--temporal-shard-multiplier", type=int, default=2, help="Make each shard X many chunks across the timestep dimension")
+    parser.add_argument("--spatial-shard-multiplier", type=int, default=2, help="Make each shard X many chunks across the spatial dimensions")
     parser.add_argument("-v", "--verbose", action="count", default=0, help="Log verbose output")
     args = parser.parse_args()
 
@@ -460,11 +463,15 @@ if __name__ == "__main__":
     config = SatelliteConfig(args.include_data_quality_vars, args.include_all_vars)
     processor = GOESProcessor(args.satellite, config, compressors=zarr.codecs.ZstdCodec(level=args.compressor_level), serializer=PCodec(level=args.serializer_level))
 
+    chunks = (args.temporal_chunk_size, args.spatial_chunk_size, args.spatial_chunk_size)
+    shards = (chunks[0]*args.temporal_shard_multiplier, *[c*args.spatial_shard_multiplier for c in chunks[1:]])
+
     processor.process_files(
         file_paths=file_paths,
         store_name=args.store_path,
         target_grid_file=get_target_grid_file(args.satellite, args.grid_lon_extent),
         regridder_weights=args.regridder_weight_file,
         satellite=args.satellite,
-        chunks=(args.temporal_chunk_size, args.spatial_chunk_size, args.spatial_chunk_size)
+        chunks=chunks,
+        shards=shards
     )

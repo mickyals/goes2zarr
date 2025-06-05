@@ -1,4 +1,4 @@
-zarr
+zarr==3.0.3 # until https://github.com/zarr-developers/zarr-python/issues/2900 is resolved
 xarray
 numpy
 pyproj
