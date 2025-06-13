@@ -399,19 +399,16 @@ class GOESProcessor:
                 ta[:] = encoded_time
 
             # Process bands
-            futures = [] #ensure futures always exists
-            
-            try:
-                with concurrent.futures.ThreadPoolExecutor() as executor:
-                    futures = [executor.submit(self.process_band, ds=ds, chunks=chunks, mask=mask, shards=shards),
-                                 for band in self.config.BANDS]
-                LOGGER.info("Completed conversion of batch from file %d to %d.", i, batch_end)
-                
-            finally:            
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                futures = [executor.submit(self.process_band, ds=ds, chunks=chunks, mask=mask, shards=shards),
+                             for band in self.config.BANDS]
                 for future in concurrent.futures.as_completed(futures):
-                    exc = future.exception()
-                    if exc:
-                        LOGGER.error("Future error: %s", exc)
+                exc = future.exception()
+                if exc:
+                    LOGGER.error("Future error: %s", exc)
+            LOGGER.info("Completed conversion of batch from file %d to %d.", i, batch_end)
+                   
+                
             
         # Consolidate metadata
         zarr.consolidate_metadata(self.zarr_store)
