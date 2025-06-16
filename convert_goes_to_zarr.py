@@ -4,7 +4,6 @@ GOES Satellite Data to Zarr Conversion Pipeline
 Modularized implementation for processing GOES-R series ABI L2 data into Zarr format.
 """
 
-from functools import partial
 import logging
 import pathlib
 import zarr
